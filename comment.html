@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>CheckLegit - Comments</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js"></script>
+    <!-- Social -->
+    <meta property="og:url" content="https://www.facebook.com/CheckLegit.Top/" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Thống kê lượt đánh giá của bạn" />
+    <meta property="og:description" content="Check Legit Việt Nam" />
+    <meta property="og:image" content="https://graph.facebook.com/872376319590687/picture?width=9999" />
+    <style>
+        #hello {
+            /* -webkit-column-count: 2;
+            -moz-column-count: 2;
+            column-count: 2; */
+        }
+
+        #fb_page {
+            float: right;
+            width: 340px;
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <noscript>
+            <b>Trình duyệt chưa có bật javascript nha. :D</b>
+        </noscript>
+        <div id="hello">
+            <!-- <div id="" class="fb-page" data-href="https://www.facebook.com/CheckLegit.Top" data-width="330" data-hide-cover="false"
+                data-show-facepile="true"></div> -->
+            <h2>Xin chào,</h2>
+            <p id="fullname">Dưới đây là bảng thống kê lượt đánh giá của: </p>
+        </div>
+        <table class="table table-dark table-hover">
+            <thead>
+                <tr>
+                    <th>Họ tên</th>
+                    <th>Đánh giá</th>
+                    <th>Lời nhận xét</th>
+                </tr>
+            </thead>
+            <tbody id="comments">
+                <!-- <tr>
+			<td>John</td>
+			<td>Doe</td>
+			<td>john@example.com</td>
+          </tr> -->
+            </tbody>
+        </table>
+        <footer>
+            <p>
+                <i>
+                    <b>@ 2018 CheckLegit.Top</b> -
+                    <a href="https://fb.com/CheckLegit.Top">Facebook.com/CheckLegit.Top</a>
+                </i>
+            </p>
+        </footer>
+    </div>
+    <script>
+        var getUrlParameter = function getUrlParameter(sParam) {
+            var sPageURL = decodeURIComponent(window.location.search.substring(1)),
+                sURLVariables = sPageURL.split('&'),
+                sParameterName,
+                i;
+
+            for (i = 0; i < sURLVariables.length; i++) {
+                sParameterName = sURLVariables[i].split('=');
+
+                if (sParameterName[0] === sParam) {
+                    return sParameterName[1] === undefined ? true : sParameterName[1];
+                }
+            }
+        };
+        $.ajax({
+            url: "https://api.checklegit.pvps.cf/comments/" + getUrlParameter('user'),
+            type: "get",
+            dataType: "json",
+            data: {},
+            success: function (result) {
+                var data = result.data;
+                var text = '';
+                var nums = data.length;
+                if (nums == 0) {
+                    text = 'Bạn chưa có đánh giá nào.!!';
+                } else {
+                    for (i = 0; i < nums; i++) {
+                        text += '<tr><td>' + data[i].fullname + '</td><td>' + data[i].rating + '/5 <i class="fa fa-star" style="color:yellow"></i></td><td>' + data[i].comment + '</td></tr>';
+                    }
+                    $("#fullname").append('<b>' + result.fullname + '</b>');
+                    $("#comments").html(text);
+                }
+            }
+        });
+    </script>
+    <div id="fb-root"></div>
+    <script>(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk.js#xfbml=1&version=v3.0&appId=674508949395164&autoLogAppEvents=1';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</body>
+
+</html>
