@@ -427,7 +427,7 @@
     <footer class="footer">
         <div class="container">
             <div class="row">
-                <a href="index-video.html" class="effect footer-title">PvP Nguyen Phat</a>
+                <a class="effect footer-title">PvP Nguyen Phat</a>
                 <div class="footer-social">
                     <ul class="footer-social-list">
                         <li><a class="effect" href="https://fb.me/pvp.sad"><i class="fa fa-facebook"></i></a></li>
@@ -465,7 +465,22 @@
     <script src="js/isotope.pkgd.min.js"></script>
     <!-- Custom js -->
     <script src="js/main.js"></script>
-
+    <!-- Load Facebook SDK for JavaScript -->
+    <div id="fb-root"></div>
+    <script>
+        window.fbAsyncInit = function () { FB.init({ xfbml: true, version: 'v4.0' }); };
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+    <!-- Your customer chat code -->
+    <div class="fb-customerchat" attribution=setup_tool page_id="144998289592364" theme_color="#7646ff"
+        logged_in_greeting="Chào bạn, cảm ơn bạn đã nhắn tin cho mình, mình sẽ trả lời sớm nhất có thể. !"
+        logged_out_greeting="Chào bạn, cảm ơn bạn đã nhắn tin cho mình, mình sẽ trả lời sớm nhất có thể. !">
+    </div>
 </body>
 
 </html>
